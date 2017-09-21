@@ -1,6 +1,7 @@
-## sddm-plus.groovy methods <a name="top/>"
+## sddm-plus.groovy methods
+<a name="top"/>
 
-###General/Model methods methods
+### General/Model methods methods
 - [log()](#log)
 - [show()](#show)
 - [ask()](#ask)
@@ -9,7 +10,7 @@
 - [getTablesWhereNameLike()](#getTablesWhereNameLike)
 - [getTablesWhereNameNotLike()](#getTablesWhereNameNotLike)
 
-###Table methods
+### Table methods
 - [Table.getColumns()](#getColumns)
 - [Table.getColumnWhereNameEquals()](#getColumnWhereNameEquals)
 - [Table.getColumnsWhereNameLike()](#getColumnsWhereNameLike)
@@ -134,8 +135,9 @@ matcher | A String or List
 
 [Top](#top)
 
+<a name="getTablesWhereNameNotLike"/>
 
-## getTablesWhereNameNotLike()<a name="getTablesWhereNameNotLike"/>
+## getTablesWhereNameNotLike()
 
 <p>
 <p>Returns a List of Table objects from the current relational model that do not match the given matcher (case insensitive).</p>
