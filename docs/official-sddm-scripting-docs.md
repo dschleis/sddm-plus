@@ -9,5 +9,7 @@ Stand-alone version: `<INSTALL_DIR>/datamodeler/datamodeler/xmlmetadata/doc`
 
 Within this directory there are 2 files of interest:
 
- 1. *SQLDeveloperDataModelerScripting.docx* contains an overview of scripting in SDDM, but from the perspective of writing transformation scripts, designed to make modifications to your model programmatically.
- 2. *index.html* is an HTML document describing in detail the properties of the objects that are accessible using scripting. Again, this document is geared toward the creation of transformation scripts, but can be used to determine what properties are available to be inspected when performing a design validation. It should also be noted that this document is not 100% accurate.
+ 1. *SQLDeveloperDataModelerScripting.docx* ontains an overview of scripting in Data Modeler. While it does contain some useful information, it is far from comprehensive, and to be honest, it reads more like a set of notes than product documentation.
+ 2. *index.html* file is an HTML document describing the properties of the objects that are accessible using scripting.
+
+Also, please see my blog series on [scripting in Oracle SqL Developer Data Modeler](https://daveschleis.wordpress.com/2017/08/15/data-modeler-scripting-101-lets-start-at-the-very-beginning/)

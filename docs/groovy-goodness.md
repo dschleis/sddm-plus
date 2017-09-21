@@ -24,7 +24,12 @@ def app = oracle.dbtools.crest.swingui.ApplicationView
 // output to log
 app.log("Table name:${table.name}")
 ```
- Click on **Apply**, and the output appears in the **Messages - Log** pane. If the Log pane is not visible, select **View | Log** from the top-level menu.
+Or, if you are using SDDM^Plus, you can use the *log()* method like this:
+```groovy
+// output to log using sddm-plus
+log("Table name:${table.name}")
+```
+Click on **Apply**, and the output appears in the **Messages - Log** pane. If the Log pane is not visible, select **View | Log** from the top-level menu.
 
  ![](images/useLog.png)
 

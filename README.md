@@ -8,11 +8,9 @@ This script is to assist the user in writing scripts for Oracle SQL Developer Da
 
 ### How do I get set up? ###
 
-![Please see the documentation](docs/README.md)
+[Please see the documentation](docs/README.md)
 
 
 ### Who do I talk to? ###
 
-Contacts: David Schleis
-@dschleis
-dschleis@gmail.com
+Please [submit an issue](issues) if you have questions or comments regarding this project.

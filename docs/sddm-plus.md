@@ -1,5 +1,6 @@
-## sddm-plus.groovy
+## sddm-plus.groovy methods <a name="top/>"
 
+###General/Model methods methods
 - [log()](#log)
 - [show()](#show)
 - [ask()](#ask)
@@ -7,12 +8,14 @@
 - [getTableWhereNameEquals()](#getTableWhereNameEquals)
 - [getTablesWhereNameLike()](#getTablesWhereNameLike)
 - [getTablesWhereNameNotLike()](#getTablesWhereNameNotLike)
+
+###Table methods
 - [Table.getColumns()](#getColumns)
 - [Table.getColumnWhereNameEquals()](#getColumnWhereNameEquals)
 - [Table.getColumnsWhereNameLike()](#getColumnsWhereNameLike)
 - [Table.getColumnsWhereNameNotLike()](#getColumnsWhereNameNotLike)
 
-## log()<a name='log'/a>
+## log()<a name="log"/>
 
 <p>
 <p>Writes to the Data Modeler log window.</p>
@@ -28,7 +31,7 @@ Name | Description
 --- | ---
 message | The message that is displayed in the log window
 
-## show()<a name='show'/a>
+## show()<a name="show"/>
 
 <p>
 <p>Displays a message in a dialog box.</p>
@@ -44,7 +47,9 @@ Name | Description
 --- | ---
 message | The message that is displayed in the dialog box
 
-## ask()<a name='ask'/a>
+[Top](#top)
+
+## ask()<a name="ask"/>
 
 <p>
 <p>Displays a message in a dialog box and returns the string that is input.</p>
@@ -61,8 +66,11 @@ Name | Description
 question | The message that is displayed in the dialog box
 *return* |  A String object containing the user input
 
+[Top](#top)
 
-## getTables()<a name="getTables"></a>
+
+
+## getTables()<a name="getTables"/>
 
 <p>
 <p>Returns a list of the table objects found in the current relational model.</p>
@@ -78,7 +86,10 @@ Name | Description
 --- | ---
 *return* | List of Table objects
 
-## getTableWhereNameEquals()<a name="getTableWhereNameEquals"></a>
+[Top](#top)
+
+
+## getTableWhereNameEquals()<a name="getTableWhereNameEquals"/>
 
 <p>
 <p>Returns the table with the given name (case insensitive) found in the current relational model.</p>
@@ -94,6 +105,9 @@ Name | Description
 --- | ---
 matcher | A String that is the name of the table
 *return* | A Table object
+
+[Top](#top)
+
 
 ## getTablesWhereNameLike()<a name="getTablesWhereNameLike"/>
 
@@ -118,6 +132,9 @@ Name | Description
 matcher | A String or List
 *return* | A List of Table objects
 
+[Top](#top)
+
+
 ## getTablesWhereNameNotLike()<a name="getTablesWhereNameNotLike"/>
 
 <p>
@@ -141,6 +158,9 @@ Name | Description
 --- | ---
 matcher | A String or List
 *return* | A List of Table objects
+
+[Top](#top)
+
 
 ## Table.getColumns()<a name="getColumns"/>
 
@@ -168,6 +188,9 @@ Name | Description
 --- | ---
 *return* | List of Column objects
 
+[Top](#top)
+
+
 ## Table.getColumnWhereNameEquals()<a name="getColumnWhereNameEquals"/>
 
 <p>
@@ -184,6 +207,9 @@ Name | Description
 --- | ---
 matcher | A String that is the name of the column
 *return* | A Column object.
+
+[Top](#top)
+
 
 ## Table.getColumnsWhereNameLike()<a name="getColumnsWhereNameLike"/>
 
@@ -208,6 +234,9 @@ Name | Description
 matcher | A String or List
 *return* | A List of Column objects
 
+[Top](#top)
+
+
 ## Table.getColumnsWhereNameNotLike()<a name="getColumnsWhereNameNotLike"/>
 
 <p>
@@ -230,3 +259,6 @@ Name | Description
 --- | ---
 matcher | A String or List
 *return* | A List of Column objects
+
+[Top](#top)
+
