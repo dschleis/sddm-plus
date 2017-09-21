@@ -1,7 +1,7 @@
 ## sddm-plus.groovy methods
 <a name="top"/>
 
-### General/Model methods methods
+### General/Model methods
 - [log()](#log)
 - [show()](#show)
 - [ask()](#ask)
@@ -16,7 +16,9 @@
 - [Table.getColumnsWhereNameLike()](#getColumnsWhereNameLike)
 - [Table.getColumnsWhereNameNotLike()](#getColumnsWhereNameNotLike)
 
-## log()<a name="log"/>
+<a name="log"/>
+
+## log()
 
 <p>
 <p>Writes to the Data Modeler log window.</p>
@@ -32,8 +34,10 @@ Name | Description
 --- | ---
 message | The message that is displayed in the log window
 
-## show()<a name="show"/>
+<a name="show"/>
 
+
+## show()
 <p>
 <p>Displays a message in a dialog box.</p>
 </p>
@@ -50,7 +54,9 @@ message | The message that is displayed in the dialog box
 
 [Top](#top)
 
-## ask()<a name="ask"/>
+<a name="ask"/>
+
+## ask()
 
 <p>
 <p>Displays a message in a dialog box and returns the string that is input.</p>
@@ -69,9 +75,9 @@ question | The message that is displayed in the dialog box
 
 [Top](#top)
 
+<a name="getTables"/>
 
-
-## getTables()<a name="getTables"/>
+## getTables()
 
 <p>
 <p>Returns a list of the table objects found in the current relational model.</p>
@@ -89,8 +95,9 @@ Name | Description
 
 [Top](#top)
 
+<a name="getTableWhereNameEquals"/>
 
-## getTableWhereNameEquals()<a name="getTableWhereNameEquals"/>
+## getTableWhereNameEquals()
 
 <p>
 <p>Returns the table with the given name (case insensitive) found in the current relational model.</p>
@@ -109,8 +116,9 @@ matcher | A String that is the name of the table
 
 [Top](#top)
 
+<a name="getTablesWhereNameLike"/>
 
-## getTablesWhereNameLike()<a name="getTablesWhereNameLike"/>
+## getTablesWhereNameLike()
 
 <p>
 <p>Returns a List of Table objects from the current relational model that match the given matcher (case insensitive).</p>
@@ -163,8 +171,9 @@ matcher | A String or List
 
 [Top](#top)
 
+<a name="getColumns"/>
 
-## Table.getColumns()<a name="getColumns"/>
+## Table.getColumns()
 
 <p>
 <p>Returns all columns of a table.</p>
@@ -192,8 +201,9 @@ Name | Description
 
 [Top](#top)
 
+<a name="getColumnWhereNameEquals"/>
 
-## Table.getColumnWhereNameEquals()<a name="getColumnWhereNameEquals"/>
+## Table.getColumnWhereNameEquals()
 
 <p>
 <p>Returns the column of a table with the given name (case insensitive)</p>
@@ -212,8 +222,9 @@ matcher | A String that is the name of the column
 
 [Top](#top)
 
+<a name="getColumnsWhereNameLike"/>
 
-## Table.getColumnsWhereNameLike()<a name="getColumnsWhereNameLike"/>
+## Table.getColumnsWhereNameLike()
 
 <p>
 <p>Returns a List of Column objects that match the given matcher (case insensitive).</p>
@@ -238,8 +249,9 @@ matcher | A String or List
 
 [Top](#top)
 
+<a name="getColumnsWhereNameNotLike"/>
 
-## Table.getColumnsWhereNameNotLike()<a name="getColumnsWhereNameNotLike"/>
+## Table.getColumnsWhereNameNotLike()
 
 <p>
 <p>Returns a List of Column objects that do not match the given matcher (case insensitive).</p>

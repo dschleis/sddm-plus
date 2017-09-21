@@ -13,4 +13,4 @@ This script is to assist the user in writing scripts for Oracle SQL Developer Da
 
 ### Who do I talk to? ###
 
-Please [submit an issue](issues) if you have questions or comments regarding this project.
+Please [submit an issue](sddm-plus/issues) if you have questions or comments regarding this project.

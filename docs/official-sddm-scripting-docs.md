@@ -12,4 +12,4 @@ Within this directory there are 2 files of interest:
  1. *SQLDeveloperDataModelerScripting.docx* ontains an overview of scripting in Data Modeler. While it does contain some useful information, it is far from comprehensive, and to be honest, it reads more like a set of notes than product documentation.
  2. *index.html* file is an HTML document describing the properties of the objects that are accessible using scripting.
 
-Also, please see my blog series on [scripting in Oracle SqL Developer Data Modeler](https://daveschleis.wordpress.com/2017/08/15/data-modeler-scripting-101-lets-start-at-the-very-beginning/)
+Also, please see my blog series on [Scripting in Oracle SqL Developer Data Modeler](https://daveschleis.wordpress.com/2017/08/15/data-modeler-scripting-101-lets-start-at-the-very-beginning/)
