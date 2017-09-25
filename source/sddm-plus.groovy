@@ -9,6 +9,15 @@ import javax.swing.JOptionPane
 import javax.swing.JDialog
 import javax.swing.JFrame
 
+/*
+ * This list contains the definition of the audit columns added to tables using the addAuditColumnsToTables method.
+ *
+ */
+def auditCols = [[name:'USER_CRE', type:'VARCHAR', size:'255 BYTE'],
+                [name:'DATE_CRE', type:'Date', size:''],
+                [name:'USER_MOD', type:'VARCHAR', size:'255 BYTE'],
+                [name:'DATE_MOD', type:'Date', size:'']]
+
 /**
  * Displays a message in a dialog box and returns the string that is input.
  *
@@ -97,6 +106,17 @@ oracle.dbtools.crest.model.design.relational.Table.metaClass {
   getColumnsWhereNameNotLike= { matcher  ->
     return getThings(delegate.getElements(), matcher, true)
   }
+
+  //addColumn (String name, String datatype, Integer size, Integer precision)
+  addColumn = { (colName, datatype, size, precisionOrType ->
+    def newCol = delegate.createColumn()
+    with newCol {
+      name = colName
+
+    }
+
+    }
+
 }
 
  /**
@@ -152,6 +172,99 @@ def getTablesWhereNameLike(matcher) {
    */
 def getTablesWhereNameNotLike(matcher) {
   getThings(model.tableSet, matcher, true)
+}
+
+/**
+ * Adds a common prefix to all tables in the model that do not already have the prefix.
+ *
+ * The prefix can optionally be provided as an argument to the method.
+ * If the prefix is not provided, the user will be prompted.
+ * If the prefix does not end with "_" it will be appended to the prefix.
+ * If the table already has the prefix, it is not added again.
+ *
+ * @param prefix Optional prefix to add to all tables
+ */
+Void addPrefixToTables (String prefix='') {
+
+  if (!prefix) {  // if the prefix is not given, ask for it
+    prefix = JOptionPane.showInputDialog("Please provide the table prefix.").toUpperCase()
+  }
+  if (prefix[-1] != '_') {
+    prefix += '_'
+  }
+  model.tableSet.toArray().each { table ->
+      if (!table.name.toUpperCase().startsWith(prefix)) {
+        table.name = "$prefix${table.name.toUpperCase()}"
+        table.dirty = true
+      }
+  }
+}
+
+/**
+ * Adds standard audit columns to all tables in the model that do not already have them.
+ *
+ * The audit columns are defined in the global array *auditCols*.
+ * To customize the audit column definitions, this array can be modifed within the user script before calling the method.
+ * The default column definitions look like this:
+ * @example
+ * auditCols = [[name:'USER_CRE', type:'VARCHAR', size:'255 BYTE'],
+ *              [name:'DATE_CRE', type:'Date', size:''],
+ *              [name:'USER_MOD', type:'VARCHAR', size:'255 BYTE'],
+ *              [name:'DATE_MOD', type:'Date', size:'']]
+ *
+ * @param auditCols The global array containing the definitioan of the audit columns
+ */
+Void addAuditColumnsToTables (auditCols) {
+
+  model.tableSet.each { table ->
+    def columnNames = table.elements.collect {it.name.toUpperCase()}
+    // loop through the Audit columns to see if it exists in the table, if not, add it.
+    auditCols.each {auditCol ->
+      if (!columnNames.contains(auditCol.name)) {
+        // create the column
+        def newCol = table.createColumn()
+        newCol.with {
+          name = auditCol.name
+          use = 1
+          logicalDatatype = model.design.logicalDatatypeSet.getLogTypeByName(auditCol.type);
+          dataTypeSize = auditCol.size
+          ownDataTypeParameters = "${auditCol.size},,"
+        }
+        table.dirty = true
+      }
+    }
+  }
+}
+
+/**
+ * Removes standard audit columns to all tables in the model that already have them.
+ *
+ * The method looks only at the column name to determine if the column shold be dropped.
+ * The audit columns are defined in the global array *auditCols*.
+ * To customize the audit column definitions, this array can be modifed within the user script before calling the method.
+ * The default column definitions look like this:
+ *
+ * auditCols = [[name:'USER_CRE', type:'VARCHAR', size:'255 BYTE'],
+ *              [name:'DATE_CRE', type:'Date', size:''],
+ *              [name:'USER_MOD', type:'VARCHAR', size:'255 BYTE'],
+ *              [name:'DATE_MOD', type:'Date', size:'']]
+ *
+ * @param auditCols The global array containing the definitioan of the audit columns
+ */
+Void dropAuditColumnsFromTables (auditCols) {
+
+  model.tableSet.each { table ->
+    def columnNames = table.elements.collect {it.name.toUpperCase()}
+    // loop through the Audit columns to see if it exists in the table, if so, remove it.
+    auditCols.each {auditCol ->
+      if (columnNames.contains(auditCol.name)) {
+        // remove the column
+        def newCol = table.getColumnWhereNameEquals(auditCol.name)
+        newCol.remove()
+        table.dirty = true
+      }
+    }
+  }
 }
 
 /*!
@@ -239,6 +352,9 @@ Boolean stringContains (String haystack, needle) {
   }
   return retVal
 }
+
+
+
 /*!
  * Writes to the log a string containing that command that was evaluated, and the result.
  *

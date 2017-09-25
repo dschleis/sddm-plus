@@ -9,6 +9,9 @@
 - [getTableWhereNameEquals()](#getTableWhereNameEquals)
 - [getTablesWhereNameLike()](#getTablesWhereNameLike)
 - [getTablesWhereNameNotLike()](#getTablesWhereNameNotLike)
+- [addPrefixToTables()](#addPrefixToTables)
+- [addAuditColumnsToTables()](#addAuditColumnsToTables)
+- [dropAuditColumnsFromTables()](#dropAuditColumnsFromTables)
 
 ### Table methods
 - [Table.getColumns()](#getColumns)
@@ -170,6 +173,95 @@ matcher | A String or List
 *return* | A List of Table objects
 
 [Top](#top)
+
+<a name="addPrefixToTables"/>
+
+## addPrefixToTables()
+
+<p>
+<p>Adds a common prefix to all tables in the model that do not already have the prefix.</p>
+<br/>
+<p>The prefix can optionally be provided as an argument to the method.</p>
+<p>If the prefix is not provided, the user will be prompted.</p>
+<p>If the prefix does not end with "_" it will be appended to the prefix.</p>
+<p>If the table already has the prefix, it is not added again.</p>
+</p>
+
+### Syntax
+```groovy
+addPrefixToTables (String prefix='')
+```
+
+### Parameters
+Name | Description
+--- | ---
+prefix | Optional prefix to add to all tables
+
+[Top](#top)
+
+<a name="addAuditColumnsToTables"/>
+
+## addAuditColumnsToTables()
+
+<p>
+<p>Adds standard audit columns to all tables in the model that do not already have them.</p>
+<br/>
+<p>The audit columns are defined in the global array *auditCols*.</p>
+<p>To customize the audit column definitions, this array can be modifed within the user script before calling the method.</p>
+<p>The default column definitions look like this:</p>
+</p>
+
+```groovy
+auditCols = [[name:'USER_CRE', type:'VARCHAR', size:'255 BYTE'],
+[name:'DATE_CRE', type:'Date', size:''],
+[name:'USER_MOD', type:'VARCHAR', size:'255 BYTE'],
+[name:'DATE_MOD', type:'Date', size:'']]
+```
+
+### Syntax
+```groovy
+addAuditColumnsToTables (auditCols)
+```
+### Parameters
+Name | Description
+--- | ---
+auditCols | The array containing the definitioan of the audit columns
+
+[Top](#top)
+
+<a name="dropAuditColumnsToTables"/>
+
+## dropAuditColumnsToTables()
+
+<p>
+<p>Removes standard audit columns to all tables in the model that already have them.</p>
+<br/>
+<p> The method looks only at the column name to determine if the column shold be dropped.</p>
+<p>The audit columns are defined in the global array *auditCols*.</p>
+<p>To customize the audit column definitions, this array can be modifed within the user script before calling the method.</p>
+<p>The default column definitions look like this:</p>
+</p>
+
+```groovy
+auditCols = [[name:'USER_CRE', type:'VARCHAR', size:'255 BYTE'],
+[name:'DATE_CRE', type:'Date', size:''],
+[name:'USER_MOD', type:'VARCHAR', size:'255 BYTE'],
+[name:'DATE_MOD', type:'Date', size:'']]
+```
+
+### Syntax
+```groovy
+addAuditColumnsToTables (auditCols)
+```
+### Parameters
+Name | Description
+--- | ---
+auditCols | The array containing the definitioan of the audit columns
+
+[Top](#top)
+
+
+
 
 <a name="getColumns"/>
 
