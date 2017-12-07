@@ -9,14 +9,7 @@ import javax.swing.JOptionPane
 import javax.swing.JDialog
 import javax.swing.JFrame
 
-/*
- * This list contains the definition of the audit columns added to tables using the addAuditColumnsToTables method.
- *
- */
-def auditCols = [[name:'USER_CRE', type:'VARCHAR', size:'255 BYTE'],
-                [name:'DATE_CRE', type:'Date', size:''],
-                [name:'USER_MOD', type:'VARCHAR', size:'255 BYTE'],
-                [name:'DATE_MOD', type:'Date', size:'']]
+
 
 /**
  * Displays a message in a dialog box and returns the string that is input.
@@ -48,6 +41,260 @@ Void log(String message) {
 }
 
 oracle.dbtools.crest.model.design.relational.Table.metaClass {
+  logProperties { ->
+    log("\n")
+    log("name:\t${name}")
+    log("Class Table")
+    log("abbreviation:\t${delegate?.abbreviation}")
+    log("adequatelyNormalized:\t${delegate?.adequatelyNormalized}")
+    log("expectedVolumes:\t${delegate?.expectedVolumes}")
+    log("growthPercent:\t${delegate?.growthPercent}")
+    log("growthType:\t${delegate?.growthType}")
+    log("maxVolumes:\t${delegate?.maxVolumes}")
+    log("minVolumes:\t${delegate?.minVolumes}")
+    log("normalForm:\t${delegate?.normalForm}")
+    log("oidIsPK:\t${delegate?.oidIsPK}")
+    log("scope:\t${delegate?.scope}")
+    log("basedOnStructuredType:\t${delegate?.basedOnStructuredType}")
+    log("afterCreate:\t${delegate?.afterCreate}")
+    log("beforeCreate:\t${delegate?.beforeCreate}")
+    log("beforeDrop:\t${delegate?.beforeDrop}")
+    log("endOfScript:\t${delegate?.endOfScript}")
+    log("shouldGenerateScript:\t${delegate?.shouldGenerateScript}")
+    log("spatialTable:\t${delegate?.spatialTable}")
+    log("splittedTableID:\t${delegate?.splittedTableID}")
+    log("userDefinedOid:\t${delegate?.userDefinedOid}")
+    log("allowColumnReorder:\t${delegate?.allowColumnReorder}")
+    log("redactionPolicyName:\t${delegate?.redactionPolicyName}")
+    log("redactionPolicyDefaultExpression:\t${delegate?.redactionPolicyDefaultExpression}")
+    log("redactionPolicyEnabled:\t${delegate?.redactionPolicyEnabled}")
+    log("redactionPolicyGenerateInDDL:\t${delegate?.redactionPolicyGenerateInDDL}")
+    log("isEngineerToRelation:\t${delegate?.isEngineerToRelation()}")
+    log("existDependencyGenerateInDDl:\t${delegate?.existDependencyGenerateInDDl}")
+    log("existDependencyConstraintName:\t${delegate?.existDependencyConstraintName}")
+    log("existDependencyGenerationLevel:\t${delegate?.existDependencyGenerationLevel}")
+    log("includeSchemaNameInQuery:\t${delegate?.includeSchemaNameInQuery}")
+    log("incorrectSQL:\t${delegate?.incorrectSQL}")
+    log("materializedQueryTable:\t${delegate?.materializedQueryTable}")
+    log("onPrebuiltTable:\t${delegate?.onPrebuiltTable}")
+    log("parsed:\t${delegate?.parsed}")
+    log("syntaxProvider:\t${delegate?.syntaxProvider}")
+    log("useObjectsOnlyFrom:\t${delegate?.useObjectsOnlyFrom}")
+    log("userDefinedSQL:\t${delegate?.userDefinedSQL}")
+    log("validSQL:\t${delegate?.validSQL}")
+    log("")
+    log("associated:\t${delegate?.isAssociated()}")
+    log("mtoNjoinCandidate:\t${delegate?.mtoNjoinCandidate}")
+    log("referencedByFKs:\t${delegate?.referencedByFKs}")
+    log("allFKColumns:\t${delegate?.getAllFKColumns()}")
+    log("allFKPlaceHolderColumns:\t${delegate?.allFKPlaceHolderColumns}")
+    log("allInds_PK_UK_NoFKeys:\t${delegate?.allInds_PK_UK_NoFKeys}")
+    log("allNestedElements:\t${delegate?.allNestedElements}")
+    log("allPossibleElements:\t${delegate?.allPossibleElements}")
+    log("allSubstitutionTables:\t${delegate?.allSubstitutionTables}")
+    log("allowedStrTypeInstances:\t${delegate?.allowedStrTypeInstances}")
+    log("arcs:\t${delegate?.arcs}")
+    log("byteSize:\tInsufficient documentation")
+    log("checkConstraints:\t${delegate?.checkConstraints}")
+    log("columnForDelegate:\tInsufficient documentation")
+    log("columnGroupsSet:\t${delegate?.columnGroupsSet}")
+    log("columnSet:\t${delegate?.columnSet}")
+    log("deletedMapping:\t${delegate?.deletedMapping}")
+    log("editableFonts:\t${delegate?.editableFonts}")
+    log("engEntity:\t${delegate?.engEntity}")
+    log("engRelation:\t${delegate?.engRelation}")
+    log("expectedVolumes:\t${delegate?.expectedVolumes}")
+    log("FKAssociations:\t${delegate?.FKAssociations}")
+    log("FKAssociationsCount:\t${delegate?.FKAssociationsCount}")
+    log("FKAssociationsList:\t${delegate?.FKAssociationsList}")
+    log("FKIndexAssociationfor:\tInsufficient documentation")
+    log("FKIndexAssociationsWith:\tInsufficient documentation")
+    log("FKeysOnColumn:\tInsufficient documentation")
+    log("fontObject:\t${delegate?.getFontObject()}")
+    log("growthPercentInt:\t${delegate?.growthPercentInt}")
+    log("indexByName:\t${delegate?.getIndexByName()}")
+    log("indexes:\t${delegate?.indexes}")
+    log("mappingsToEntities:\t${delegate?.mappingsToEntities}")
+    log("maxVolumes:\t${delegate?.maxVolumes}")
+    log("minVolumes:\t${delegate?.minVolumes}")
+    log("nonStructuredElements:\t${delegate?.nonStructuredElements}")
+    log("numberOfFKAssociationFor:\t${delegate?.getNumberOfFKAssociationFor()}")
+    log("numberOfFKAssociationFor:\tInsufficient documentation")
+    log("PKeys:\t${delegate?.PKeys}")
+    log("possibleSplits:\t${delegate?.possibleSplits}")
+    log("UKeys:\t${delegate?.UKeys}")
+    log("validTimeDimAsString:\t${delegate?.validTimeDimAsString}")
+    log("")
+    log("columns:\t${delegate?.columns}")
+    log("nestedElements:\t${delegate?.nestedElements}")
+    log("indexes:\t${delegate?.indexes}")
+    log("checkConstraints:\t${delegate?.checkConstraints}")
+    log("validTimeDimensions:\t${delegate?.validTimeDimensions}")
+    log("columnGroupsSet:\t${delegate?.columnGroupsSet}")
+    log("spatialDefinitions:\t${delegate?.spatialDefinitions}")
+    log("usedObjectsList:\t${delegate?.usedObjectsList}")
+
+    log("\n")
+    log("Class ContainerWithKeyObject")
+    log("typeID:\t${typeID}")
+    log("additionalClassificationTypes:\t${additionalClassificationTypes}")
+    log("Read Only")
+    log("valid:\t${valid}")
+    log("firstFK:\t${firstFK}")
+    log("keyArrayPrototype:\t${keyArrayPrototype}")
+    log("keyGeneratedBy:\tInsufficient documentation")
+    log("keyObject:\t${getKeyObject()}")
+    log("keySet:\t${keySet}")
+    log("keys:\t${keys}")
+    log("keysWith:\t${getKeysWith()}")
+    log("numberOfKeys:\t${numberOfKeys}")
+    log("oidKey:\t${oidKey}")
+    log("PKorUnique:\t${PKorUnique}")
+    log("add_ClassificationTypes:\t${add_ClassificationTypes}")
+    log("allClassificationTypes:\t${allClassificationTypes}")
+    log("classificationType:\t${classificationType}")
+
+    log("\n")
+    log("Class ContainerObject")
+    log("afterAlter:\t${afterAlter}")
+    log("afterCreate:\t${afterCreate}")
+    log("allowTypeSubstitution:\t${allowTypeSubstitution}")
+    log("basedOnStructuredType:\t${basedOnStructuredType}")
+    log("beforeAlter:\t${beforeAlter}")
+    log("beforeCreate:\t${beforeCreate}")
+    log("beforeDrop:\t${beforeDrop}")
+    log("endOfScript:\t${endOfScript}")
+    log("schemaObject:\t${schemaObject}")
+    log("shouldGenerateScript:\t${shouldGenerateScript}")
+    log("typeSubstitution:\t${typeSubstitution}")
+    log("typeSubstitutionParentID:\t${typeSubstitutionParentID}")
+    log("typeSubstitutionID:\t${typeSubstitutionID}")
+    log("Read Only")
+    log("BST:\t${BST}")
+    log("partOfTypeSubstHierarchy:\t${partOfTypeSubstHierarchy}")
+    log("root:\t${root}")
+    log("substitutable:\t${substitutable}")
+    log("allElementsGeneratedBy:\tInsufficient documentation")
+    log("allElementsListGeneratedBy:\tInsufficient documentation")
+    log("containedClass:\t${containedClass}")
+    log("containedSet:\t${containedSet}")
+    log("containerListeners:\t${containerListeners}")
+    log("element:\tInsufficient documentation")
+    log("elementByID:\tInsufficient documentation")
+    log("elementByName:\tInsufficient documentation")
+    log("elementByStructAttributeID:\tInsufficient documentation")
+    log("elementGeneratedBy:\tInsufficient documentation")
+    log("elements:\t${elements}")
+    log("elementsByStructuredType:\tInsufficient documentation")
+    log("elementsCollection:\t${elementsCollection}")
+    log("elementsCollectionImmutable:\t${elementsCollectionImmutable}")
+    log("indexOf:\tInsufficient documentation")
+    log("localIDGenerator:\t${localIDGenerator}")
+    log("localObject:\tInsufficient documentation")
+    log("nestedElements:\t${nestedElements}")
+    log("numberOfNullsAllowingElements:\t${numberOfNullsAllowingElements}")
+    log("oidElement:\t${oidElement}")
+    log("referIDMap:\t${referIDMap}")
+    log("subTypeSubstitutions:\t${subTypeSubstitutions}")
+    log("topLevelContainer:\t${topLevelContainer}")
+
+    log("\n")
+    log("Class MultiShapedDesignObject")
+    log("alwaysVisibleInMainView:\t${alwaysVisibleInMainView}")
+    log("visibleInMainview:\t${visibleInMainView}")
+    log("affectedDPVs:\t${affectedDPVs}")
+    log("allTopViews:\t${allTopViews}")
+    log("allViews:\t${allViews}")
+    log("allViewsWithCellViews:\t${allViewsWithCellViews}")
+    log("anotherView:\tInsufficient documentation")
+    log("viewSynonims:\t${getViewSynonims()}")
+    log("usedInSubviews:\t${usedInSubviews}")
+
+    log("\n")
+    log("Class DesignObject")
+    log("importedId:\t${importedId}")
+    log("lineWidth:\t${lineWidth}")
+    log("engineerTo:\t${engineerTo}")
+    log("deprecated:\t${deprecated}")
+    log("ORDSDropSchema:\t${ORDSDropSchema}")
+    log("ORDSEnable:\t${ORDSEnable}")
+    log("ORDSAuth:\t${ORDSAuth}")
+    log("ORDSAlias:\t${ORDSAlias}")
+    log("useDDLTransformationScript:\t${useDDLTransformationScript}")
+    log("visible:\t${visible}")
+    log("Read Only")
+    log("containedObject:\t${containedObject}")
+    log("designLevelAccessibleObject:\t${designLevelAccessibleObject}")
+    log("designPartId:\t${designPartId}")
+    log("firstViewForDPV:\t${getFirstViewForDPV()}")
+    log("generatorLongName:\t${generatorLongName}")
+    log("isBeingRemoved:\t${isBeingRemoved}")
+    log("responsibleParties:\t${responsibleParties}")
+    log("requests:\t${requests}")
+    log("measurements:\t${measurements}")
+    log("documents:\t${documents}")
+    log("topViewsCount:\t${topViewsCount}")
+    log("version:\t${version}")
+    log("viewNumber:\tInsufficient documentation")
+    log("viewsCountForDPV:\t${getViewsCountForDPV()}")
+    log("viewsForDPv:\t${getViewsForDPV()}")
+    log("Collections")
+    log("fontObjectWrappers:\t${fontObjectWrappers}")
+    log("measurements:\t${measurements}")
+    log("documents:\t${documents}")
+    log("requests:\t${requests}")
+    log("responsibleParties:\t${responsibleParties}")
+
+    log("\n")
+    log("Class ModelIDObject")
+    log("createdBy:\t${createdBy}")
+    log("createdTime:\t${createdTime}")
+    log("comment:\t${comment}")
+    log("commentInRDBMS:\t${commentInRDBMS}")
+    log("directorySegmentName:\t${directorySegmentName}")
+    log("generatorID:\t${generatorID}")
+    log("nameFixed:\t${nameFixed}")
+    log("notes:\t${notes}")
+    log("objectID:\t${objectID}")
+    log("ownerDesignName:\t${ownerDesignName}")
+    log("remoteDesignID:\t${remoteDesignID}")
+    log("remoteModelID:\t${remoteModelID}")
+    log("remoteObjectID:\t${remoteObjectID}")
+    log("remoteObjectRelativeStorageName:\t${remoteObjectRelativeStorageName}")
+    log("repositoryOID:\t${repositoryOID}")
+    log("repositoryOVID:\t${repositoryOVID}")
+    log("shouldEngineer:\t${shouldEngineer}")
+    log("nameHasQuotes:\t${nameHasQuotes}")
+    log("usedAsRemoteObject:\t${usedAsRemoteObject}")
+    log("Read Only")
+    log("dialogVisible:\t${dialogVisible}")
+    log("systemObject:\t${systemObject}")
+    log("change:\t${change}")
+    log("changeTime:\t${changeTime}")
+    log("creation:\t${creation}")
+    log("creationTime:\t${creationTime}")
+    log("generator:\t${generator}")
+    log("IDPrefix:\t${IDPrefix}")
+    log("maxNameLength:\t${maxNameLength}")
+    log("objectTypeName:\t${getObjectTypeName()}")
+    log("oldobjectTypeName:\t${oldObjectTypeName}")
+    log("pathIDString:\t${pathIDString}")
+    log("propertiesDialog:\t${propertiesDialog}")
+    log("property:\tgetProperty('name_of_property')")
+    log("propertyNames:\t${propertyNames}")
+    log("markedGenerate:\t${markedGenerate}")
+
+    log("\n")
+    log("Class ModelObject")
+    log("name:\t${name}")
+    log("sourceConnName:\t${sourceConnName}")
+    log("sourceObjSchema:\t${sourceObjSchema}")
+    log("sourceObjName:\t${sourceObjName}")
+    log("sourceDDLFile:\t${sourceDDLFile}")
+    log("----------------------------------------------------------------------------")
+
+  }
+
   /**
    * Returns all columns of a table.
    *
@@ -107,17 +354,283 @@ oracle.dbtools.crest.model.design.relational.Table.metaClass {
     return getThings(delegate.getElements(), matcher, true)
   }
 
-  //addColumn (String name, String datatype, Integer size, Integer precision)
-  addColumn = { (colName, datatype, size, precisionOrType ->
-    def newCol = delegate.createColumn()
-    with newCol {
-      name = colName
+  /**
+   * Creates a column on the table using the provided information.
+   *
+   * This method adds a column to the table. Currently Numeric, Varchar and Date data types are supported.ß
+   *
+   * @param colName The name of the new column
+   * @param datatype The data type of the new column
+   * @param precisionOrSize The precision of a numeric column, or the size of a varchar. Use '' for date.
+   * @param scaleOrType The scale of a numeric column, or the type, byte or char, for a varchar. Use '' for date.
+   */
+   addColumn = { colName, datatype, precisionOrSize, scaleOrType ->
+    // if the datatype is not an allowed type, send a message to the log.
+    def validTypes = model.design.logicalDatatypeSet.collect {it?.name.toUpperCase()}
+    if (!validTypes.contains(datatype.toUpperCase())) {
+      log ("Attempting to add column $colName to table ${delegate.name}: datatype $datatype not valid.  Must be one of: $validTypes")
+    } else {
 
+      def newCol = delegate.createColumn()
+      newCol.with {
+        name = colName
+        use = 1
+        logicalDatatype = model.design.logicalDatatypeSet.getLogTypeByName(datatype.toUpperCase());
+        // if the column is a varchar, add the type to the size, othwise add it as a precision.
+        switch (logicalDatatype.toString().toUpperCase()) {
+          case 'STRING':
+          case 'VARCHAR':
+            dataTypeSize = "$precisionOrSize ${scaleOrType?.toUpperCase()}"
+            break
+          default:
+            dataTypePrecision = precisionOrSize
+            dataTypeScale = scaleOrType
+        }
+        ownDataTypeParameters = "${precisionOrSize},,"
+      }
+      delegate.dirty = true
     }
+  }
 
-    }
+} // end of Table metaclass definition
 
-}
+oracle.dbtools.crest.model.design.relational.Column.metaClass {
+  logProperties { ->
+    log("\n")
+    log("name:\t${name}")
+    log("Class Column")
+    log("abbreviation:\t${delegate?.abbreviation}")
+    log("computed:\t${delegate?.computed}")
+    log("containsPII:\t${delegate?.containsPII}")
+    log("containsSensitiveInformation:\t${delegate?.containsSensitiveInformation}")
+    log("defaultDisplayAs:\t${delegate?.defaultDisplayAs}")
+    log("defaultDisplayedOnForms:\t${delegate?.defaultDisplayedOnForms}")
+    log("defaultDisplayedOnReports:\t${delegate?.defaultDisplayedOnReports}")
+    log("defaultFormDisplayWidth:\t${delegate?.defaultFormDisplayWidth}")
+    log("defaultFormHeight:\t${delegate?.defaultFormHeight}")
+    log("defaultFormMaximumWidth:\t${delegate?.defaultFormMaximumWidth}")
+    log("defaultFormatMask:\t${delegate?.defaultFormatMask}")
+    log("defaultHelpText:\t${delegate?.defaultHelpText}")
+    log("defaultLabel:\t${delegate?.defaultLabel}")
+    log("defaultReadOnly:\t${delegate?.defaultReadOnly}")
+    log("maskData:\t${delegate?.maskData}")
+    log("maskingType:\t${delegate?.maskingType}")
+    log("maskTemplate:\t${delegate?.maskTemplate}")
+    log("previousColumn:\t${delegate?.previousColumn}")
+    log("autoIncrementColumn:\t${delegate?.autoIncrementColumn}")
+    log("identityColumn:\t${delegate?.identityColumn}")
+    log("autoIncrementGenerateAlways:\t${delegate?.autoIncrementGenerateAlways}")
+    log("autoIncrementStartWith:\t${delegate?.autoIncrementStartWith}")
+    log("autoIncrementIncrementBy:\t${delegate?.autoIncrementIncrementBy}")
+    log("autoIncrementMinValue:\t${delegate?.autoIncrementMinValue}")
+    log("autoIncrementMaxValue:\t${delegate?.autoIncrementMaxValue}")
+    log("autoIncrementCycle:\t${delegate?.autoIncrementCycle}")
+    log("autoIncrementDisableCache:\t${delegate?.autoIncrementDisableCache}")
+    log("autoIncrementCache:\t${delegate?.autoIncrementCache}")
+    log("autoIncrementOrder:\t${delegate?.autoIncrementOrder}")
+    log("autoIncrementSequenceName:\t${delegate?.autoIncrementSequenceName}")
+    log("autoIncrementTriggerName:\t${delegate?.autoIncrementTriggerName}")
+    log("autoIncrementGenerateTrigger:\t${delegate?.autoIncrementGenerateTrigger}")
+    log("notNullConstraintName:\t${delegate?.notNullConstraintName}")
+    log("generateConstraintInDDL:\t${delegate?.generateConstraintInDDL}")
+    log("discriminatorColumn:\t${delegate?.discriminatorColumn}")
+    log("surrogateColumn:\t${delegate?.surrogateColumn}")
+    log("relationshipColumn:\t${delegate?.relationshipColumn}")
+    log("dependOnForeignKeyID:\t${delegate?.dependOnForeignKeyID}")
+    log("dependOnFK_AsMandatory:\t${delegate?.dependOnFK_AsMandatory}")
+    log("notNullConstraintNameFixed:\t${delegate?.notNullConstraintNameFixed}")
+    log("checkConstraintNameFixed:\t${delegate?.checkConstraintNameFixed}")
+    log("Read Only")
+    log("adapter:\t${delegate?.adapter}")
+    log("datatypeString:\t${delegate?.datatypeString}")
+    log("dataTypeName:\t${delegate?.dataTypeName}")
+    log("table:\t${delegate?.table}")
+    log("tableSchemaName:\t${delegate?.tableSchemaName}")
+    log("adapterLoaded:\t${delegate?.adapterLoaded}")
+    log("FKColumn:\t${delegate?.FKColumn}")
+    log("FKPlaceHolderColumn:\t${delegate?.FKPlaceHolderColumn}")
+    log("inFKinArc:\t${delegate?.inFKinArc}")
+    log("inOptionalFK:\t${delegate?.inOptionalFK}")
+    log("partOfFKIndexAssociation:\tInsufficient documentation")
+    log("referingTo:\tInsufficient documentation")
+    log("AVTString:\t${delegate?.AVTString}")
+    log("allDelegatesAndFK:\t${delegate?.allDelegatesAndFK}")
+    log("allFKs:\t${delegate?.allFKs}")
+    log("assocToColumn:\t${delegate?.getAssocToColumn()}")
+    log("associationsCount:\t${delegate?.associationsCount}")
+    log("datatypeText:\t${delegate?.datatypeText}")
+    log("engAttribute:\t${delegate?.engAttribute}")
+    log("FKAssociationsForDelegate:\t${delegate?.getFKAssociationsForDelegate()}")
+    log("FKIndexAssociation:\t${delegate?.FKIndexAssociation}")
+    log("mappingFor:\t${delegate?.getMappingFor()}")
+    log("mappingsFor:\t${delegate?.getMappingsFor()}")
+    log("optionalFK:\t${delegate?.optionalFK}")
+    log("originatingColumn:\t${delegate?.originatingColumn}")
+    log("refColAndAssocIDs:\t${delegate?.refColAndAssocIDs}")
+    log("referencedColumn:\t${delegate?.referencedColumn}")
+    log("Collections")
+    log("FKAssociationMaps:\t${delegate?.FKAssociationMaps}")
+    log("dependentColumns:\t${delegate?.dependentColumns}")
+    log("\n")
+    log("Class ContainedObjectWithDomain")
+    log("allowSubtypeSubstitution:\t${delegate?.allowSubtypeSubstitution}")
+    log("use:\t${delegate?.use}")
+    log("collectionType:\t${delegate?.collectionType}")
+    log("structuredType:\t${delegate?.structuredType}")
+    log("distinctType:\t${delegate?.distinctType}")
+    log("logicalDatatype:\t${delegate?.logicalDatatype}")
+    log("dataTypePrecision:\t${delegate?.dataTypePrecision}")
+    log("dataTypeScale:\t${delegate?.dataTypeScale}")
+    log("dataTypeSize:\t${delegate?.dataTypeSize}")
+    log("domain:\t${delegate?.domain}")
+    log("reference:\t${delegate?.reference}")
+    log("restrictedTypeSubstitution:\t${delegate?.restrictedTypeSubstitution}")
+    log("usesDefaultValue:\t${delegate?.usesDefaultValue}")
+    log("ownCheck:\t${delegate?.ownCheck}")
+    log("ownValueList:\t${delegate?.ownValueList}")
+    log("defaultValue:\t${delegate?.defaultValue}")
+    log("sensitiveType:\t${delegate?.sensitiveType}")
+    log("sensitiveTypeDescription:\t${delegate?.sensitiveTypeDescription}")
+    log("ownDataTypeParameters:\t${delegate?.ownDataTypeParameters}")
+    log("Read Only")
+    log("dataTypeKind:\t${delegate?.dataTypeKind}")
+    log("exactRefToStructuredType:\t${delegate?.isExactRefToStructuredType()}")
+    log("PKElement:\t${delegate?.PKElement}")
+    log("refToStructuredType:\t${delegate?.isRefToStructuredType()}")
+    log("constraintsText:\t${delegate?.constraintsText}")
+    log("containerWithKeyObject:\t${delegate?.containerWithKeyObject}")
+    log("dataType:\t${delegate?.dataType}")
+    log("dataTypeParameter:\tInsufficient documentation")
+    log("datatypeString:\t${delegate?.datatypeString}")
+    log("genericDatatypeString:\t${delegate?.genericDatatypeString}")
+    log("permittedSubTypes:\t${delegate?.permittedSubTypes}")
+    log("positionInPK:\t${delegate?.positionInPK}")
+    log("precision:\t${delegate?.precision}")
+    log("scale:\t${delegate?.scale}")
+    log("units:\t${delegate?.units}")
+    log("Collections")
+    log("permittedStrTypes:\t${delegate?.getPermittedSubTypes()}")
+
+    log("\n")
+    log("Class ContainedObject")
+    log("AVTSortOrder:\t${delegate?.AVTSortOrder}")
+    log("collectionType:\t${delegate?.collectionType}")
+    log("constraintComment:\t${delegate?.constraintComment}")
+    log("constraintCommentInRDBMS:\t${delegate?.constraintCommentInRDBMS}")
+    log("constraintName:\t${delegate?.constraintName}")
+    log("constraintNotes:\t${delegate?.constraintNotes}")
+    log("formulaDesc:\t${delegate?.formulaDesc}")
+    log("nullsAllowed:\t${delegate?.nullsAllowed}")
+    log("oid:\t${delegate?.oid}")
+    log("parentObject:\t${delegate?.parentObject}")
+    log("referedAttribute:\t${delegate?.referedAttribute}")
+    log("scopeId:\t${delegate?.scopeId}")
+    log("sourceType:\t${delegate?.sourceType}")
+    log("structAttributeID:\t${delegate?.structAttributeID}")
+    log("structuredType:\t${delegate?.structuredType}")
+    log("synonym:\t${delegate?.synonym}")
+    log("useDomainConstraints:\t${delegate?.useDomainConstraints}")
+    log("Read Only")
+    log("atomic:\t${delegate?.atomic}")
+    log("mandatory:\t${delegate?.mandatory}")
+    log("nested:\t${delegate?.nested}")
+    log("FKElement:\t${delegate?.FKElement}")
+    log("AVTs:\t${delegate?.AVTs}")
+    log("delegateElement:\t${delegate?.delegateElement}")
+    log("deletedMapping:\tInsufficient documentation")
+    log("index:\t${delegate?.index}")
+    log("nestedObjects:\t${delegate?.nestedObjects}")
+    log("positionInContainerOneBased:\t${delegate?.positionInContainerOneBased}")
+    log("scope:\t${delegate?.scope}")
+    log("size:\t${delegate?.size}")
+    log("Collections")
+    log("listOfRanges:\t${delegate?.getAVTList()}")
+
+    log("\n")
+    log("Class DesignObject")
+    log("importedId:\t${importedId}")
+    log("lineWidth:\t${lineWidth}")
+    log("engineerTo:\t${engineerTo}")
+    log("deprecated:\t${deprecated}")
+    log("ORDSDropSchema:\t${ORDSDropSchema}")
+    log("ORDSEnable:\t${ORDSEnable}")
+    log("ORDSAuth:\t${ORDSAuth}")
+    log("ORDSAlias:\t${ORDSAlias}")
+    log("useDDLTransformationScript:\t${useDDLTransformationScript}")
+    log("visible:\t${visible}")
+    log("Read Only")
+    log("containedObject:\t${containedObject}")
+    log("designLevelAccessibleObject:\t${designLevelAccessibleObject}")
+    log("designPartId:\t${designPartId}")
+    log("firstViewForDPV:\t${getFirstViewForDPV()}")
+    log("generatorLongName:\t${generatorLongName}")
+    log("isBeingRemoved:\t${isBeingRemoved}")
+    log("responsibleParties:\t${responsibleParties}")
+    log("requests:\t${requests}")
+    log("measurements:\t${measurements}")
+    log("documents:\t${documents}")
+    log("topViewsCount:\t${topViewsCount}")
+    log("version:\t${version}")
+    log("viewNumber:\tInsufficient documentation")
+    log("viewsCountForDPV:\t${getViewsCountForDPV()}")
+    log("viewsForDPv:\t${getViewsForDPV()}")
+    log("Collections")
+    log("fontObjectWrappers:\t${fontObjectWrappers}")
+    log("measurements:\t${measurements}")
+    log("documents:\t${documents}")
+    log("requests:\t${requests}")
+    log("responsibleParties:\t${responsibleParties}")
+
+    log("\n")
+    log("Class ModelIDObject")
+    log("createdBy:\t${createdBy}")
+    log("createdTime:\t${createdTime}")
+    log("comment:\t${comment}")
+    log("commentInRDBMS:\t${commentInRDBMS}")
+    log("directorySegmentName:\t${directorySegmentName}")
+    log("generatorID:\t${generatorID}")
+    log("nameFixed:\t${nameFixed}")
+    log("notes:\t${notes}")
+    log("objectID:\t${objectID}")
+    log("ownerDesignName:\t${ownerDesignName}")
+    log("remoteDesignID:\t${remoteDesignID}")
+    log("remoteModelID:\t${remoteModelID}")
+    log("remoteObjectID:\t${remoteObjectID}")
+    log("remoteObjectRelativeStorageName:\t${remoteObjectRelativeStorageName}")
+    log("repositoryOID:\t${repositoryOID}")
+    log("repositoryOVID:\t${repositoryOVID}")
+    log("shouldEngineer:\t${shouldEngineer}")
+    log("nameHasQuotes:\t${nameHasQuotes}")
+    log("usedAsRemoteObject:\t${usedAsRemoteObject}")
+    log("Read Only")
+    log("dialogVisible:\t${dialogVisible}")
+    log("systemObject:\t${systemObject}")
+    log("change:\t${change}")
+    log("changeTime:\t${changeTime}")
+    log("creation:\t${creation}")
+    log("creationTime:\t${creationTime}")
+    log("generator:\t${generator}")
+    log("IDPrefix:\t${IDPrefix}")
+    log("maxNameLength:\t${maxNameLength}")
+    log("objectTypeName:\t${getObjectTypeName()}")
+    log("oldobjectTypeName:\t${oldObjectTypeName}")
+    log("pathIDString:\t${pathIDString}")
+    log("propertiesDialog:\t${propertiesDialog}")
+    log("property:\tgetProperty('name_of_property')")
+    log("propertyNames:\t${propertyNames}")
+    log("markedGenerate:\t${markedGenerate}")
+
+    log("\n")
+    log("Class ModelObject")
+    log("name:\t${name}")
+    log("sourceConnName:\t${sourceConnName}")
+    log("sourceObjSchema:\t${sourceObjSchema}")
+    log("sourceObjName:\t${sourceObjName}")
+    log("sourceDDLFile:\t${sourceDDLFile}")
+    log("----------------------------------------------------------------------------")
+
+  }
+}  // end of Column metaclass definition
 
  /**
   * Returns a list of the table objects found in the current relational model.
@@ -207,30 +720,27 @@ Void addPrefixToTables (String prefix='') {
  * To customize the audit column definitions, this array can be modifed within the user script before calling the method.
  * The default column definitions look like this:
  * @example
- * auditCols = [[name:'USER_CRE', type:'VARCHAR', size:'255 BYTE'],
- *              [name:'DATE_CRE', type:'Date', size:''],
- *              [name:'USER_MOD', type:'VARCHAR', size:'255 BYTE'],
- *              [name:'DATE_MOD', type:'Date', size:'']]
+ * def auditCols = [[colName:'USER_CREATED', datatype:'VARCHAR', size:'255', type:'BYTE'],
+ *                  [colName:'DATE_CREATED', datatype:'Date', size:'', type:''],
+ *                  [colName:'USER_MODIFIED', datatype:'VARCHAR', size:'255', type:'BYTE'],
+ *                  [colName:'DATE_MODIFIED', datatype:'Date', size:'', type:'']]
  *
  * @param auditCols The global array containing the definitioan of the audit columns
  */
-Void addAuditColumnsToTables (auditCols) {
+def addAuditColumnsToTables (auditCols) {
 
   model.tableSet.each { table ->
-    def columnNames = table.elements.collect {it.name.toUpperCase()}
-    // loop through the Audit columns to see if it exists in the table, if not, add it.
-    auditCols.each {auditCol ->
-      if (!columnNames.contains(auditCol.name)) {
-        // create the column
-        def newCol = table.createColumn()
-        newCol.with {
-          name = auditCol.name
-          use = 1
-          logicalDatatype = model.design.logicalDatatypeSet.getLogTypeByName(auditCol.type);
-          dataTypeSize = auditCol.size
-          ownDataTypeParameters = "${auditCol.size},,"
-        }
-        table.dirty = true
+    addAuditColumnsToTable (table, auditCols)
+  }
+}
+
+def addAuditColumnsToTable (table, auditCols) {
+  def columnNames = table.elements.collect {it.name.toUpperCase()}
+  // loop through the Audit columns to see if it exists in the table, if not, add it.
+  auditCols.each {auditCol ->
+    if (!columnNames.contains(auditCol.colName)) {
+      auditCol.with {
+        table.addColumn (colName, datatype, size, type)
       }
     }
   }
@@ -243,15 +753,15 @@ Void addAuditColumnsToTables (auditCols) {
  * The audit columns are defined in the global array *auditCols*.
  * To customize the audit column definitions, this array can be modifed within the user script before calling the method.
  * The default column definitions look like this:
- *
- * auditCols = [[name:'USER_CRE', type:'VARCHAR', size:'255 BYTE'],
- *              [name:'DATE_CRE', type:'Date', size:''],
- *              [name:'USER_MOD', type:'VARCHAR', size:'255 BYTE'],
- *              [name:'DATE_MOD', type:'Date', size:'']]
+ * @example
+ * def auditCols = [[colName:'USER_CREATED', datatype:'VARCHAR', size:'255', type:'BYTE'],
+ *                  [colName:'DATE_CREATED', datatype:'Date', size:'', type:''],
+ *                  [colName:'USER_MODIFIED', datatype:'VARCHAR', size:'255', type:'BYTE'],
+ *                  [colName:'DATE_MODIFIED', datatype:'Date', size:'', type:'']]
  *
  * @param auditCols The global array containing the definitioan of the audit columns
  */
-Void dropAuditColumnsFromTables (auditCols) {
+def dropAuditColumnsFromTables (auditCols) {
 
   model.tableSet.each { table ->
     def columnNames = table.elements.collect {it.name.toUpperCase()}
@@ -353,7 +863,14 @@ Boolean stringContains (String haystack, needle) {
   return retVal
 }
 
-
+/*
+ * This list contains the definition of the audit columns added to tables using the addAuditColumnsToTables method.
+ *
+ */
+def auditCols = [[colName:'USER_CREATED', datatype:'VARCHAR', size:'255', type:'BYTE'],
+                [colName:'DATE_CREATED', datatype:'Date', size:'', type:''],
+                [colName:'USER_MODIFIED', datatype:'VARCHAR', size:'255', type:'BYTE'],
+                [colName:'DATE_MODIFIED', datatype:'Date', size:'', type:'']]
 
 /*!
  * Writes to the log a string containing that command that was evaluated, and the result.

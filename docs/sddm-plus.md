@@ -18,7 +18,11 @@
 - [Table.getColumnWhereNameEquals()](#getColumnWhereNameEquals)
 - [Table.getColumnsWhereNameLike()](#getColumnsWhereNameLike)
 - [Table.getColumnsWhereNameNotLike()](#getColumnsWhereNameNotLike)
+- [Table.addColumn()](#addColumn)
+- [Table.logProperties()](#logProperties)
 
+### Column methods
+- [Column.logProperties()](#colLogProperties)
 <a name="log"/>
 
 ## log()
@@ -212,10 +216,10 @@ prefix | Optional prefix to add to all tables
 </p>
 
 ```groovy
-auditCols = [[name:'USER_CRE', type:'VARCHAR', size:'255 BYTE'],
-[name:'DATE_CRE', type:'Date', size:''],
-[name:'USER_MOD', type:'VARCHAR', size:'255 BYTE'],
-[name:'DATE_MOD', type:'Date', size:'']]
+auditCols = [[name:'USER_CREATED', type:'VARCHAR', size:'255 BYTE'],
+[name:'DATE_CREATED', type:'Date', size:''],
+[name:'USER_MODIFIED', type:'VARCHAR', size:'255 BYTE'],
+[name:'DATE_MODIFIED', type:'Date', size:'']]
 ```
 
 ### Syntax
@@ -225,13 +229,13 @@ addAuditColumnsToTables (auditCols)
 ### Parameters
 Name | Description
 --- | ---
-auditCols | The array containing the definitioan of the audit columns
+auditCols | The array containing the definition of the audit columns
 
 [Top](#top)
 
-<a name="dropAuditColumnsToTables"/>
+<a name="dropAuditColumnsFromTables"/>
 
-## dropAuditColumnsToTables()
+## dropAuditColumnsFromTables()
 
 <p>
 <p>Removes standard audit columns to all tables in the model that already have them.</p>
@@ -243,10 +247,10 @@ auditCols | The array containing the definitioan of the audit columns
 </p>
 
 ```groovy
-auditCols = [[name:'USER_CRE', type:'VARCHAR', size:'255 BYTE'],
-[name:'DATE_CRE', type:'Date', size:''],
-[name:'USER_MOD', type:'VARCHAR', size:'255 BYTE'],
-[name:'DATE_MOD', type:'Date', size:'']]
+auditCols = [[name:'USER_CREATED', type:'VARCHAR', size:'255 BYTE'],
+[name:'DATE_CREATED', type:'Date', size:''],
+[name:'USER_MODIFIED', type:'VARCHAR', size:'255 BYTE'],
+[name:'DATE_MODIFIED', type:'Date', size:'']]
 ```
 
 ### Syntax
@@ -256,7 +260,7 @@ addAuditColumnsToTables (auditCols)
 ### Parameters
 Name | Description
 --- | ---
-auditCols | The array containing the definitioan of the audit columns
+auditCols | The array containing the definition of the audit columns
 
 [Top](#top)
 
@@ -281,6 +285,13 @@ getColumns()
 getTables().each {table ->
   log ("Table: ${table.name}")
   table.getColumns().each {col ->
+    log ("  ${col.name}")
+  }
+}
+// or, using Groovy's "getter as a property" goodness
+tables.each {table ->
+  log ("Table: ${table.name}")
+  table.columns.each {col ->
     log ("  ${col.name}")
   }
 }
@@ -368,3 +379,67 @@ matcher | A String or List
 
 [Top](#top)
 
+<a name="addColumn"/>
+
+## Table.addColumn()
+
+<p>
+<p>Creates a column on the table using the provided information.</p>
+<p>This method adds a column to the table. Currently Numeric, Varchar and Date data types are supported.
+</p>
+
+### Parameters
+Name | Description
+--- | ---
+colName | The name of the new column
+datatype | The data type of the new column
+precisionOrSize | The precision of a numeric column, or the size of a varchar. Use '' for date.
+scaleOrType | The scale of a numeric column, or the type, byte or char, for a varchar. Use '' for date.
+
+### Syntax
+```groovy
+Table.addColumn(String colName, String datatype, String precisionOrSize, String scaleOrType)
+```
+
+### Parameters
+Name | Description
+--- | ---
+matcher | A String or List
+*return* | A List of Column objects
+
+[Top](#top)
+
+<a name="logProperties"/>
+
+## Table.logProperties()
+
+<p>
+<p>Outputs a listing of all properties of the table to the system log.</p>
+<p>This method outputs all available properties of the given table to the system log.</p>
+<p>This method is designed to allow for easier exploration of available properties, and is meant to be used along side of the index.html documentation file.</p>
+<p>Some properties can not be displayed due to insufficient documentation of the getter methods, others may display null values for the same reason.
+</p>
+
+### Syntax
+```groovy
+Table.logProperties()
+```
+[Top](#top)
+
+<a name="colLogProperties"/>
+
+## Column.logProperties()
+
+<p>
+<p>Outputs a listing of all properties of the column to the system log.</p>
+<p>This method outputs all available properties of the given column to the system log.</p>
+<p>This method is designed to allow for easier exploration of available properties, and is meant to be used along side of the index.html documentation file.</p>
+<p>Some properties can not be displayed due to insufficient documentation of the getter methods, others may display null values for the same reason.
+</p>
+
+### Syntax
+```groovy
+Column.logProperties()
+```
+
+[Top](#top)
