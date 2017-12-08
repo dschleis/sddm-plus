@@ -461,6 +461,11 @@ oracle.dbtools.crest.model.design.relational.Table.metaClass {
     }
   }
 
+  /*
+  addPrefix
+  got ConcurrentModificationException
+   it is not generally permissible for one thread to modify a Collection while another thread is iterating over it
+  */
 
 } // end of Table metaclass definition
 
@@ -767,7 +772,7 @@ def getTablesWhereNameNotLike(matcher) {
  *
  * @param prefix Optional prefix to add to all tables
  */
-Void addPrefixToTables (String prefix='') {
+def addPrefixToTables (String prefix='') {
 
   if (!prefix) {  // if the prefix is not given, ask for it
     prefix = JOptionPane.showInputDialog("Please provide the table prefix.").toUpperCase()
@@ -775,14 +780,37 @@ Void addPrefixToTables (String prefix='') {
   if (prefix[-1] != '_') {
     prefix += '_'
   }
+  prefix = prefix.toUpperCase()
   model.tableSet.toArray().each { table ->
       if (!table.name.toUpperCase().startsWith(prefix)) {
-        table.name = "$prefix${table.name.toUpperCase()}"
+        table.name = "$prefix${table.name}".toUpperCase()
         table.dirty = true
       }
   }
 }
 
+/**
+ * Removes a common prefix from all tables in the model that have the prefix.
+ *
+ * The prefix can optionally be provided as an argument to the method.
+ * If the prefix is not provided, the user will be prompted.
+ * Unlike the method to add a prefix, this method will not modify the prefix provided in any way.
+ *
+ * @param prefix Optional prefix to remove from all tables
+ */
+def dropPrefixFromTables (String prefix='') {
+
+  if (!prefix) {  // if the prefix is not given, ask for it
+    prefix = JOptionPane.showInputDialog("Please provide the table prefix.").toUpperCase()
+  }
+
+  model.tableSet.toArray().each { table ->
+      if (table.name.toUpperCase().startsWith(prefix)) {
+        table.name = "${table.name.toUpperCase().substring(prefix.size())}"
+        table.dirty = true
+      }
+  }
+}
 
 /*!
  * Private method to return objects from a list based on whether they match
