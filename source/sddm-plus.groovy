@@ -392,6 +392,76 @@ oracle.dbtools.crest.model.design.relational.Table.metaClass {
     }
   }
 
+  /**
+   * Removes a column from the table based on the name
+   *
+   * This method drops a column from the table.
+   *
+   * @param colName The name of the column to be dropped
+   */
+  dropColumn = { colName ->
+    // get column names for the table
+    def columnNames = delegate.elements.collect {it.name.toUpperCase()}
+    if (columnNames.contains(colName)) {
+      def dropCol = getColumnWhereNameEquals(colName)
+      dropCol.remove()
+      delegate.dirty = true
+    }
+  }
+
+  /**
+   * Adds standard audit columns to the table if it does not already have them.
+   *
+   * The method looks only at the column name to determine if the column should be added.
+   * The audit columns are defined in the global array *auditCols*.
+   * To customize the audit column definitions, this array can be modifed within the user script before calling the method.
+   * The default column definitions look like this:
+   * @example
+   * def auditCols = [[colName:'USER_CREATED', datatype:'VARCHAR', size:'255', type:'BYTE'],
+   *                  [colName:'DATE_CREATED', datatype:'Date', size:'', type:''],
+   *                  [colName:'USER_MODIFIED', datatype:'VARCHAR', size:'255', type:'BYTE'],
+   *                  [colName:'DATE_MODIFIED', datatype:'Date', size:'', type:'']]
+   *
+   * @param auditCols The global array containing the definitioan of the audit columns
+   */
+  addAuditColumns = { auditCols ->
+    def columnNames = delegate.elements.collect {it.name.toUpperCase()}
+    // loop through the Audit columns to see if it exists in the table, if not, add it.
+    auditCols.each {auditCol ->
+      if (!columnNames.contains(auditCol.colName)) {
+        auditCol.with {
+          addColumn (colName, datatype, size, type)
+        }
+      }
+    }
+  }
+
+  /**
+   * Removes the standard audit columns from the indicated table if they exist.
+   *
+   * The method looks only at the column name to determine if the column should be dropped.
+   * The audit columns are defined in the global array *auditCols*.
+   * To customize the audit column definitions, this array can be modifed within the user script before calling the method.
+   * The default column definitions look like this:
+   * @example
+   * def auditCols = [[colName:'USER_CREATED', datatype:'VARCHAR', size:'255', type:'BYTE'],
+   *                  [colName:'DATE_CREATED', datatype:'Date', size:'', type:''],
+   *                  [colName:'USER_MODIFIED', datatype:'VARCHAR', size:'255', type:'BYTE'],
+   *                  [colName:'DATE_MODIFIED', datatype:'Date', size:'', type:'']]
+   *
+   * @param auditCols The global array containing the definitioan of the audit columns
+   */
+  dropAuditColumns = { auditCols ->
+    def columnNames = delegate.elements.collect {it.name.toUpperCase()}
+    // loop through the Audit columns to see if it exists in the table,  if so, remove it.
+    auditCols.each { auditCol ->
+      if (columnNames.contains(auditCol.colName)) {
+        dropColumn (auditCol.colName)
+      }
+    }
+  }
+
+
 } // end of Table metaclass definition
 
 oracle.dbtools.crest.model.design.relational.Column.metaClass {
@@ -713,69 +783,6 @@ Void addPrefixToTables (String prefix='') {
   }
 }
 
-/**
- * Adds standard audit columns to all tables in the model that do not already have them.
- *
- * The audit columns are defined in the global array *auditCols*.
- * To customize the audit column definitions, this array can be modifed within the user script before calling the method.
- * The default column definitions look like this:
- * @example
- * def auditCols = [[colName:'USER_CREATED', datatype:'VARCHAR', size:'255', type:'BYTE'],
- *                  [colName:'DATE_CREATED', datatype:'Date', size:'', type:''],
- *                  [colName:'USER_MODIFIED', datatype:'VARCHAR', size:'255', type:'BYTE'],
- *                  [colName:'DATE_MODIFIED', datatype:'Date', size:'', type:'']]
- *
- * @param auditCols The global array containing the definitioan of the audit columns
- */
-def addAuditColumnsToTables (auditCols) {
-
-  model.tableSet.each { table ->
-    addAuditColumnsToTable (table, auditCols)
-  }
-}
-
-def addAuditColumnsToTable (table, auditCols) {
-  def columnNames = table.elements.collect {it.name.toUpperCase()}
-  // loop through the Audit columns to see if it exists in the table, if not, add it.
-  auditCols.each {auditCol ->
-    if (!columnNames.contains(auditCol.colName)) {
-      auditCol.with {
-        table.addColumn (colName, datatype, size, type)
-      }
-    }
-  }
-}
-
-/**
- * Removes standard audit columns to all tables in the model that already have them.
- *
- * The method looks only at the column name to determine if the column shold be dropped.
- * The audit columns are defined in the global array *auditCols*.
- * To customize the audit column definitions, this array can be modifed within the user script before calling the method.
- * The default column definitions look like this:
- * @example
- * def auditCols = [[colName:'USER_CREATED', datatype:'VARCHAR', size:'255', type:'BYTE'],
- *                  [colName:'DATE_CREATED', datatype:'Date', size:'', type:''],
- *                  [colName:'USER_MODIFIED', datatype:'VARCHAR', size:'255', type:'BYTE'],
- *                  [colName:'DATE_MODIFIED', datatype:'Date', size:'', type:'']]
- *
- * @param auditCols The global array containing the definitioan of the audit columns
- */
-def dropAuditColumnsFromTables (auditCols) {
-
-  model.tableSet.each { table ->
-    def columnNames = table.elements.collect {it.name.toUpperCase()}
-    // loop through the Audit columns to see if it exists in the table, if so, remove it.
-    auditCols.each {auditCol ->
-      if (columnNames.contains(auditCol.name)) {
-        // remove the column
-        def newCol = table.getColumnWhereNameEquals(auditCol.name)
-        newCol.remove()
-        table.dirty = true
-      }
-    }
-  }
-}
 
 /*!
  * Private method to return objects from a list based on whether they match
